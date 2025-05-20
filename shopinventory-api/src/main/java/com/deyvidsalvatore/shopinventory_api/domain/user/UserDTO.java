@@ -5,48 +5,26 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
 
-public class UserDTO implements Serializable {
+public class UserDTO extends RepresentationModel<UserDTO> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
-    @NotNull(message = "Role ID is required")
     private Short roleId;
-
-    @NotBlank(message = "First name is required")
     private String firstName;
-
     private String middleName;
-
-    @NotBlank(message = "Last name is required")
     private String lastName;
-
-    @NotBlank(message = "Username is required")
     private String username;
-
-    @NotBlank(message = "Mobile number is required")
     private String mobile;
-
-    @NotBlank(message = "Email is required")
-    @Email(message = "Email should be valid")
     private String email;
-
     private String passwordHash;
-
     private Date registeredAt;
-
     private String imageUrl;
-
     private Date lastLogin;
-
     private String intro;
-
     private String profile;
 
     public UserDTO() {}
