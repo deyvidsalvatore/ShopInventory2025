@@ -5,162 +5,190 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class UserDTO implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-	private Long id;
-	private Short roleId;
-	private String firstName;
-	private String middleName;
-	private String lastName;
-	private String username;
-	private String mobile;
-	private String email;
-	private String passwordHash;
-	private Date registeredAt;
-	private String imageUrl;
-	private Date lastLogin;
-	private String intro;
-	private String profile;
-	
-	public UserDTO() {}
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @NotNull(message = "Role ID is required")
+    private Short roleId;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @NotBlank(message = "First name is required")
+    private String firstName;
 
-	public Short getRoleId() {
-		return roleId;
-	}
+    private String middleName;
 
-	public void setRoleId(Short roleId) {
-		this.roleId = roleId;
-	}
+    @NotBlank(message = "Last name is required")
+    private String lastName;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    @NotBlank(message = "Username is required")
+    private String username;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    @NotBlank(message = "Mobile number is required")
+    private String mobile;
 
-	public String getMiddleName() {
-		return middleName;
-	}
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
+    private String email;
 
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
+    private String passwordHash;
 
-	public String getLastName() {
-		return lastName;
-	}
+    private Date registeredAt;
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    private String imageUrl;
 
-	public String getUsername() {
-		return username;
-	}
+    private Date lastLogin;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    private String intro;
 
-	public String getMobile() {
-		return mobile;
-	}
+    private String profile;
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+    public UserDTO() {}
 
-	public String getEmail() {
-		return email;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getPasswordHash() {
-		return passwordHash;
-	}
+    public Short getRoleId() {
+        return roleId;
+    }
 
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
-	}
+    public void setRoleId(Short roleId) {
+        this.roleId = roleId;
+    }
 
-	public Date getRegisteredAt() {
-		return registeredAt;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setRegisteredAt(Date registeredAt) {
-		this.registeredAt = registeredAt;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
+    public String getMiddleName() {
+        return middleName;
+    }
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
 
-	public Date getLastLogin() {
-		return lastLogin;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setLastLogin(Date lastLogin) {
-		this.lastLogin = lastLogin;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public String getIntro() {
-		return intro;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setIntro(String intro) {
-		this.intro = intro;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getProfile() {
-		return profile;
-	}
+    public String getMobile() {
+        return mobile;
+    }
 
-	public void setProfile(String profile) {
-		this.profile = profile;
-	}
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(email, firstName, id, imageUrl, intro, lastLogin, lastName, middleName, mobile,
-				passwordHash, profile, registeredAt, roleId, username);
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserDTO other = (UserDTO) obj;
-		return Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(id, other.id) && Objects.equals(imageUrl, other.imageUrl)
-				&& Objects.equals(intro, other.intro) && Objects.equals(lastLogin, other.lastLogin)
-				&& Objects.equals(lastName, other.lastName) && Objects.equals(middleName, other.middleName)
-				&& Objects.equals(mobile, other.mobile) && Objects.equals(passwordHash, other.passwordHash)
-				&& Objects.equals(profile, other.profile) && Objects.equals(registeredAt, other.registeredAt)
-				&& Objects.equals(roleId, other.roleId) && Objects.equals(username, other.username);
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public Date getRegisteredAt() {
+        return registeredAt;
+    }
+
+    public void setRegisteredAt(Date registeredAt) {
+        this.registeredAt = registeredAt;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, firstName, id, imageUrl, intro, lastLogin, lastName, middleName, mobile,
+                passwordHash, profile, registeredAt, roleId, username);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        UserDTO other = (UserDTO) obj;
+        return Objects.equals(email, other.email) &&
+               Objects.equals(firstName, other.firstName) &&
+               Objects.equals(id, other.id) &&
+               Objects.equals(imageUrl, other.imageUrl) &&
+               Objects.equals(intro, other.intro) &&
+               Objects.equals(lastLogin, other.lastLogin) &&
+               Objects.equals(lastName, other.lastName) &&
+               Objects.equals(middleName, other.middleName) &&
+               Objects.equals(mobile, other.mobile) &&
+               Objects.equals(passwordHash, other.passwordHash) &&
+               Objects.equals(profile, other.profile) &&
+               Objects.equals(registeredAt, other.registeredAt) &&
+               Objects.equals(roleId, other.roleId) &&
+               Objects.equals(username, other.username);
+    }
 }
