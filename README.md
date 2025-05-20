@@ -1,0 +1,1 @@
+# ShopInventory - A System for Managing Inventory
