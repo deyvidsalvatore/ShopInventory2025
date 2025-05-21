@@ -56,6 +56,7 @@ public class UserService {
 
 	public UserDTO create(UserCreateDTO dto) {
 		logger.info("UserService ::: create ~> Creating new user");
+		validateEmailOnly(dto.getEmail());
 		UserModel entity = parseObject(dto, UserModel.class);
 		entity.setRoleId((short) 1);
 		entity.setImageUrl("profile-default.jpg");
@@ -70,6 +71,7 @@ public class UserService {
 	public UserDTO update(Long id, UserUpdateDTO dto) {
 		var entity = this.userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException());
 		logger.info("UserService ::: update ~> Updating one user with ID {}", id);
+		validateUpdateEmail(dto.getEmail(), id);
 		entity.setFirstName(dto.getFirstName());
 		entity.setLastName(dto.getLastName());
 		entity.setMiddleName(dto.getMiddleName());
@@ -105,7 +107,7 @@ public class UserService {
 
 	    String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 	    user.setImageUrl(fileName);
-	    userRepository.save(user);
+	    this.userRepository.save(user);
 
 	    FileUploadUtils.saveFile("user-photos/" + user.getId(), fileName, file);
 	}
@@ -117,6 +119,23 @@ public class UserService {
 		this.userRepository.delete(user);
 	}
 	
+	private void validateEmailOnly(String email) {
+		var emailExists = this.userRepository.existsByEmail(email);
+		if (emailExists) {
+			throw new IllegalArgumentException("User already exists with this email");
+		}
+	}
+	
+	private void validateUpdateEmail(String email, Long id) {
+	    var optionalUser = this.userRepository.findByEmail(email);
+
+	    if (optionalUser.isPresent()) {
+	        var user = optionalUser.get();
+	        if (!user.getId().equals(id)) {
+	            throw new IllegalArgumentException("This email is already used by another user");
+	        }
+	    }
+	}
 	private void addHateoasLink(UserDTO dto) {
 	    try {
 	        Long userId = dto.getId();
