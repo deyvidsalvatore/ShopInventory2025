@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class UserCreateDTO implements Serializable {
+public class UserUpdateDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -31,9 +31,6 @@ public class UserCreateDTO implements Serializable {
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
     private String email;
-    
-    @NotBlank(message = "Password is required")
-    private String password;
 
     public Short getRoleId() {
         return roleId;
@@ -83,18 +80,10 @@ public class UserCreateDTO implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserCreateDTO that)) return false;
+        if (!(o instanceof UserUpdateDTO that)) return false;
         return Objects.equals(roleId, that.roleId) &&
                Objects.equals(firstName, that.firstName) &&
                Objects.equals(lastName, that.lastName) &&
