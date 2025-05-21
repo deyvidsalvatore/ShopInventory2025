@@ -10,80 +10,90 @@ import jakarta.validation.constraints.NotNull;
 
 public class UserCreateDTO implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+	@Serial
+	private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "Role ID is required")
-    private Short roleId;
+	@NotNull(message = "Role ID is required")
+	private Short roleId;
 
-    @NotBlank(message = "First name is required")
-    private String firstName;
+	@NotBlank(message = "First name is required")
+	private String firstName;
 
-    @NotBlank(message = "Last name is required")
-    private String lastName;
+	private String middleName;
 
-    @NotBlank(message = "Username is required")
-    private String username;
+	@NotBlank(message = "Last name is required")
+	private String lastName;
 
-    @NotBlank(message = "Mobile number is required")
-    private String mobile;
+	@NotBlank(message = "Username is required")
+	private String username;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Email should be valid")
-    private String email;
-    
-    @NotBlank(message = "Password is required")
-    private String password;
+	@NotBlank(message = "Mobile number is required")
+	private String mobile;
 
-    public Short getRoleId() {
-        return roleId;
-    }
+	@NotBlank(message = "Email is required")
+	@Email(message = "Email should be valid")
+	private String email;
 
-    public void setRoleId(Short roleId) {
-        this.roleId = roleId;
-    }
+	@NotBlank(message = "Password is required")
+	private String password;
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public Short getRoleId() {
+		return roleId;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setRoleId(Short roleId) {
+		this.roleId = roleId;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public String getMiddleName() {
+		return middleName;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
 
-    public String getMobile() {
-        return mobile;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getPassword() {
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
 		return password;
 	}
 
@@ -92,19 +102,18 @@ public class UserCreateDTO implements Serializable {
 	}
 
 	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserCreateDTO that)) return false;
-        return Objects.equals(roleId, that.roleId) &&
-               Objects.equals(firstName, that.firstName) &&
-               Objects.equals(lastName, that.lastName) &&
-               Objects.equals(username, that.username) &&
-               Objects.equals(mobile, that.mobile) &&
-               Objects.equals(email, that.email);
-    }
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof UserCreateDTO that))
+			return false;
+		return Objects.equals(roleId, that.roleId) && Objects.equals(firstName, that.firstName)
+				&& Objects.equals(lastName, that.lastName) && Objects.equals(username, that.username)
+				&& Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email);
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(roleId, firstName, lastName, username, mobile, email);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(roleId, firstName, lastName, username, mobile, email);
+	}
 }

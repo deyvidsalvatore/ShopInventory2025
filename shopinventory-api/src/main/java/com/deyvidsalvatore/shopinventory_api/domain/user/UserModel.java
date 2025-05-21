@@ -25,6 +25,7 @@ public class UserModel implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name = "roleId")
 	private Short roleId;
 	
 	@Column(name = "firstName", length = 50)
@@ -45,7 +46,7 @@ public class UserModel implements Serializable {
 	@Column(name = "email", length = 50)
 	private String email;
 	
-	@Column(name = "passwordHash", length = 32, nullable = false)
+	@Column(name = "passwordHash", length = 64, nullable = false)
 	private String passwordHash;
 	
 	@Column(name = "registeredAt", columnDefinition = "DATETIME", nullable = false)

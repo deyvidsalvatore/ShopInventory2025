@@ -12,7 +12,7 @@ CREATE TABLE `shopinventory_app`.`user` (
   `username` VARCHAR(50) NULL DEFAULT NULL,
   `mobile` VARCHAR(15) NULL,
   `email` VARCHAR(50) NULL,
-  `passwordHash` VARCHAR(32) NOT NULL,
+  `passwordHash` VARCHAR(64) NOT NULL,
   `registeredAt` DATETIME NOT NULL,
   `imageUrl` VARCHAR(255),
   `lastLogin` DATETIME NULL DEFAULT NULL,
