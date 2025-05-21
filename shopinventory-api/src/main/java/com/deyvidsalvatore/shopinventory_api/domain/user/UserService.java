@@ -62,7 +62,9 @@ public class UserService {
 		entity.setPasswordHash(passwordEncoder.encode(dto.getPassword()));
 		entity.setRegisteredAt(new Date());
 		entity = this.userRepository.save(entity);
-		return parseObject(entity, UserDTO.class);
+		var result = parseObject(entity, UserDTO.class);
+		this.addHateoasLink(result);
+		return result;
 	}
 
 	public UserDTO update(Long id, UserUpdateDTO dto) {
@@ -116,7 +118,42 @@ public class UserService {
 	}
 	
 	private void addHateoasLink(UserDTO dto) {
-        dto.add(linkTo(methodOn(UserWebController.class).findById(dto.getId())).withSelfRel().withType("GET"));
-    }
+	    try {
+	        Long userId = dto.getId();
+
+	        dto.add(linkTo(methodOn(UserWebController.class).findById(userId))
+	                .withSelfRel()
+	                .withType("GET"));
+
+	        dto.add(linkTo(methodOn(UserWebController.class).findAll(0, 10, null))
+	                .withRel("findAll")
+	                .withType("GET"));
+
+	        dto.add(linkTo(methodOn(UserWebController.class).create(null))
+	                .withRel("create")
+	                .withType("POST"));
+
+	        dto.add(linkTo(methodOn(UserWebController.class).update(userId, null))
+	                .withRel("update")
+	                .withType("PUT"));
+
+	        dto.add(linkTo(methodOn(UserWebController.class).updatePassword(userId, null))
+	                .withRel("updatePassword")
+	                .withType("PATCH"));
+
+	        dto.add(linkTo(methodOn(UserWebController.class).updateProfileImage(userId, null))
+	                .withRel("updateProfileImage")
+	                .withType("PATCH"));
+
+	        dto.add(linkTo(methodOn(UserWebController.class).delete(userId))
+	                .withRel("delete")
+	                .withType("DELETE"));
+
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error on Adding HATEOAS Links: " + e.getMessage());
+	    }
+	}
+
+
 
 }
