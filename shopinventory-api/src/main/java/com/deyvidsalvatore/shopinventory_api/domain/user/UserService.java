@@ -5,6 +5,7 @@ import static com.deyvidsalvatore.shopinventory_api.domain.mapper.ObjectMapper.p
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+import java.io.IOException;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -15,11 +16,14 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.deyvidsalvatore.shopinventory_api.domain.exceptions.ResourceNotFoundException;
 import com.deyvidsalvatore.shopinventory_api.domain.user.dto.UpdateUserPasswordDTO;
 import com.deyvidsalvatore.shopinventory_api.domain.user.dto.UserCreateDTO;
 import com.deyvidsalvatore.shopinventory_api.domain.user.dto.UserUpdateDTO;
+import com.deyvidsalvatore.shopinventory_api.utils.FileUploadUtils;
 import com.deyvidsalvatore.shopinventory_api.web.UserWebController;
 
 @Service
@@ -91,6 +95,19 @@ public class UserService {
 		this.userRepository.save(user);
 	}
 
+	public void updateUserProfileImg(Long id, MultipartFile file) throws IOException {
+	    FileUploadUtils.validateImage(file);
+
+	    var user = userRepository.findById(id)
+	        .orElseThrow(ResourceNotFoundException::new);
+
+	    String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+	    user.setImageUrl(fileName);
+	    userRepository.save(user);
+
+	    FileUploadUtils.saveFile("user-photos/" + user.getId(), fileName, file);
+	}
+	
 	public void delete(Long userId) {
 		logger.info("UserService ::: delete ~> Deleting user with ID {}", userId);
 		var user = this.userRepository.findById(userId)
