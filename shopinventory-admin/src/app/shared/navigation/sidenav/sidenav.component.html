@@ -1,0 +1,39 @@
+<mat-toolbar color="primary" class="sidenav">
+  <mat-toolbar-row>
+    <h1>
+      <mat-icon>shopping_cart</mat-icon>
+      <span>ShopInventory - Admin Panel</span>
+    </h1>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav opened mode="side" [style.width]="'200px'">
+    <mat-nav-list>
+      <a
+        mat-list-item
+        *ngFor="let item of sideMenuItems"
+        [routerLink]="item.url"
+        routerLinkActive="active"
+      >
+        <div class="custom-list-item">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span matLine>{{ item.label }}</span>
+        </div>
+      </a>
+    </mat-nav-list>
+    <div class="sidenav-footer">
+      <mat-divider></mat-divider>
+      <div class="footer-content">
+        <mat-icon>info</mat-icon>
+        <span>ShopInventory v1.0</span>
+      </div>
+      <div class="footer-creator">
+        <mat-icon>person</mat-icon>
+        <span>&#64;deyvidsalvatore</span>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

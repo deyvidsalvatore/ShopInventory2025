@@ -1,15 +1,13 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
+    <app-sidenav>
+      <router-outlet />
+    </app-sidenav>
   `,
   standalone: false,
-  styles: []
+  styles: [],
 })
-export class AppComponent {
-  title = 'shopinventory-admin';
-}
+export class AppComponent {}
